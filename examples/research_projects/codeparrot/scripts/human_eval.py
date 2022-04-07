@@ -183,10 +183,7 @@ def main():
 
     n_tasks = args.num_tasks if args.num_tasks is not None else len(human_eval["test"])
     n_copies = args.n_samples // args.batch_size
-    if n_tasks * n_copies % accelerator.num_processes != 0:
-        raise ValueError(
-            f"worker tasks({args.n_samples}x{n_tasks}) should be a mulitple of batch_size({args.batch_size}) x num_processes({accelerator.num_processes})"
-        )
+
     # get tokens max length. It there a smarter way to do this?
     max_len = 0
     for task in range(n_tasks):
